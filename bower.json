@@ -1,0 +1,29 @@
+{
+    "name": "ngStringToJson",
+    "version": "1.0.0",
+    "homepage": "https://github.com/nitesh354/ngStringToJson",
+    "authors": [
+        "Nitesh Mishra <niteshmishra@niteshmishra.in>"
+    ],
+    "description": "",
+    "main": [
+        "build/ng-string-to-json.min.js"
+    ],
+    "keywords": [
+        "ngStringToJson",
+        "json",
+        "angularjs",
+        "javascript"
+    ],
+    "license": "GPL-2.0",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "~1.2.28"
+    }
+}
