@@ -4,7 +4,7 @@
     "description": "",
     "repository": {
         "type": "git",
-        "url": "https://github.com/nitesh354/ngStringToJson"
+        "url": "https://github.com/nitesh354/ngStringToJson.git"
     },
     "keywords": [
         "ngStringToJson",
