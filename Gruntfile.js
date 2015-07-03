@@ -13,7 +13,12 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                banner: '/**\n' +
+                    ' * <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                    ' * @author: <%= pkg.author %>\n' +
+                    ' * @homepage: <%= pkg.homepage %>\n' +
+                    ' * @license: <%= pkg.license %>\n' +
+                    ' */\n\n'
             },
             build: {
                 src: 'src/<%= pkg.name %>.js',
@@ -28,5 +33,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('lint', ['jshint']);
+    grunt.registerTask('test', ['karma']);
+    grunt.registerTask('build', ['uglify']);
+
+    grunt.registerTask('default', ['lint', 'test', 'build']);
 };
