@@ -10,12 +10,14 @@
         myApp.controller('demoCtrl', function ($scope, $log) {
             $scope.$watch('finalJson', function (value) {
                 $log.log(value);
+                $scope.finalJsonString = angular.toJson($scope.finalJson);
             });
         });
     </script>
 </head>
 
 <body ng-controller="demoCtrl">
+    <div ng-bind="finalJsonString"></div>
     <div ng-string-to-json ng-model="finalJson">
         <div nm-object>
             <div nm-data key="states">
