@@ -47,7 +47,7 @@
                         nmDataCtrl.setData(scope.data);
                     }
                 };
-                scope.$watch('data', scope.update);
+                scope.$watchCollection('data', scope.update);
             }
         };
     }]);
@@ -78,7 +78,7 @@
                         nmDataCtrl.setData(scope.data);
                     }
                 };
-                scope.$watch('data', scope.update);
+                scope.$watchCollection('data', scope.update);
             }
         };
     }]);
