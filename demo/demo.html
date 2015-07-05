@@ -1,0 +1,34 @@
+<html ng-app="myApp">
+
+<head>
+    <title>ng-string-to-json Demo</title>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../src/ng-string-to-json.js"></script>
+    <script type="text/javascript">
+        var myApp = angular.module('myApp', ['ngStringToJson']);
+
+        myApp.controller('demoCtrl', function ($scope, $log) {
+            $scope.$watch('finalJson', function (value) {
+                $log.log(value);
+            });
+        });
+    </script>
+</head>
+
+<body ng-controller="demoCtrl">
+    <div ng-string-to-json ng-model="finalJson">
+        <div nm-object>
+            <div nm-data key="states">
+                <div nm-array>
+                    <div nm-data value="Punjab"></div>
+                    <div nm-data value="Haryana"></div>
+                    <div nm-data value="Delhi"></div>
+                    <div nm-data value="Odisha"></div>
+                </div>
+            </div>
+            <div nm-data key="country" value="india"></div>
+        </div>
+    </div>
+</body>
+
+</html>
