@@ -118,10 +118,22 @@
     }]);
 
     myModule.factory('nmGetParentCtrl', function () {
+        var toSnakeCase = function (camelCaseString) {
+            return camelCaseString.replace(/([A-Z])/g, function ($1) {
+                return "-" + $1.toLowerCase();
+            });
+        };
+        var hasAttr = function (elem, attr) {
+            if (angular.isDefined(elem.attr(toSnakeCase(attr)))) {
+                return true;
+            } else {
+                return false;
+            }
+        };
         var _getParentCtrl = function (elem, type) {
             if (elem && type) {
                 var parentElem = elem.parent() || undefined;
-                var parentElemCtrl = (parentElem && parentElem.controller(type)) || undefined;
+                var parentElemCtrl = (parentElem && hasAttr(parentElem, type) && parentElem.controller(type)) || undefined;
 
                 return parentElemCtrl;
             } else {
