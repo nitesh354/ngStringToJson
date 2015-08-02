@@ -37,14 +37,16 @@
                 var nmObjectCtrl = nmGetParentCtrl(elem, 'nmObject');
                 var nmDataCtrl = nmGetParentCtrl(elem, 'nmData');
                 scope.update = function (value) {
-                    if (angular.isDefined(ngStringToJsonCtrl)) {
-                        ngStringToJsonCtrl.setData(scope.data);
-                    } else if (angular.isDefined(nmArrayCtrl)) {
-                        nmArrayCtrl.setData(scope.data);
-                    } else if (angular.isDefined(nmObjectCtrl)) {
-                        $log.error('Invalid hierarchy :: nm-array couldn\'t have nm-object as parent.');
-                    } else if (angular.isDefined(nmDataCtrl)) {
-                        nmDataCtrl.setData(scope.data);
+                    if (value && value.length) {
+                        if (angular.isDefined(ngStringToJsonCtrl)) {
+                            ngStringToJsonCtrl.setData(scope.data);
+                        } else if (angular.isDefined(nmArrayCtrl)) {
+                            nmArrayCtrl.setData(scope.data);
+                        } else if (angular.isDefined(nmObjectCtrl)) {
+                            $log.error('Invalid hierarchy :: nm-array couldn\'t have nm-object as parent.');
+                        } else if (angular.isDefined(nmDataCtrl)) {
+                            nmDataCtrl.setData(scope.data);
+                        }
                     }
                 };
                 scope.$watchCollection('data', scope.update);
@@ -68,17 +70,26 @@
                 var nmObjectCtrl = nmGetParentCtrl(elem, 'nmObject');
                 var nmDataCtrl = nmGetParentCtrl(elem, 'nmData');
                 scope.update = function (value) {
-                    if (angular.isDefined(ngStringToJsonCtrl)) {
-                        ngStringToJsonCtrl.setData(scope.data);
-                    } else if (angular.isDefined(nmArrayCtrl)) {
-                        nmArrayCtrl.setData(scope.data);
-                    } else if (angular.isDefined(nmObjectCtrl)) {
-                        $log.error('Invalid hierarchy :: nm-object couldn\'t have nm-object as parent.');
-                    } else if (angular.isDefined(nmDataCtrl)) {
-                        nmDataCtrl.setData(scope.data);
+                    if (value && !isObjectEmpty(value)) {
+                        if (angular.isDefined(ngStringToJsonCtrl)) {
+                            ngStringToJsonCtrl.setData(scope.data);
+                        } else if (angular.isDefined(nmArrayCtrl)) {
+                            nmArrayCtrl.setData(scope.data);
+                        } else if (angular.isDefined(nmObjectCtrl)) {
+                            $log.error('Invalid hierarchy :: nm-object couldn\'t have nm-object as parent.');
+                        } else if (angular.isDefined(nmDataCtrl)) {
+                            nmDataCtrl.setData(scope.data);
+                        }
                     }
                 };
                 scope.$watchCollection('data', scope.update);
+
+                var isObjectEmpty = function (obj) {
+                    for (var key in obj) {
+                        return false;
+                    }
+                    return true;
+                };
             }
         };
     }]);
@@ -102,14 +113,16 @@
                 scope.key = attr.key;
                 scope.value = scope.value || attr.value;
                 scope.update = function (value) {
-                    if (angular.isDefined(ngStringToJsonCtrl)) {
-                        ngStringToJsonCtrl.setData(scope.value);
-                    } else if (angular.isDefined(nmArrayCtrl)) {
-                        nmArrayCtrl.setData(scope.value);
-                    } else if (angular.isDefined(nmObjectCtrl)) {
-                        nmObjectCtrl.setData(scope.key, scope.value);
-                    } else if (angular.isDefined(nmDataCtrl)) {
-                        $log.error('Invalid hierarchy :: nm-data couldn\'t have nm-data as parent.');
+                    if (value) {
+                        if (angular.isDefined(ngStringToJsonCtrl)) {
+                            ngStringToJsonCtrl.setData(scope.value);
+                        } else if (angular.isDefined(nmArrayCtrl)) {
+                            nmArrayCtrl.setData(scope.value);
+                        } else if (angular.isDefined(nmObjectCtrl)) {
+                            nmObjectCtrl.setData(scope.key, scope.value);
+                        } else if (angular.isDefined(nmDataCtrl)) {
+                            $log.error('Invalid hierarchy :: nm-data couldn\'t have nm-data as parent.');
+                        }
                     }
                 };
                 scope.$watch('value', scope.update);
